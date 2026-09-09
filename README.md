@@ -12,8 +12,8 @@ js/app.js           データ読み込み・タブ切り替え・酒帳ロジッ
 data/breweries.json 出展蔵元・銘柄（公式サイトより転記、booth番号は会場図入手後に追記）
 data/food.json      出展飲食店
 data/info.json      開催概要・ルール・タイムテーブル
-assets/venue-map.png          当日配布MAPの画像（圧縮済み、マップタブに表示・タップで拡大）
-assets/venue-map-original.png 圧縮前の元画像（地図更新時の差し替え用）
+assets/venue-map.jpg              当日配布MAPの画像（圧縮済み、マップタブに表示・タップで拡大）
+assets/venue-map-original.jpg     圧縮前の元画像（地図更新時の差し替え用。.png でも可）
 manifest.json       PWA設定
 sw.js               Service Worker（オフラインキャッシュ）
 icons/              PWAアイコン（プレースホルダー、差し替え可）
@@ -81,7 +81,7 @@ python -m http.server 8080
 
 ## 現状のスコープ・今後の課題
 
-- **会場マップ**：当日配布MAPの画像（`assets/venue-map.png`）をマップタブ上部に表示、タップで拡大（ピンチズーム対応）。あわせて蔵元62件すべてにブース番号・エリア（A/B/C）を反映し、「エリア帯をタップ→蔵元一覧をそのエリアで絞り込み」も利用できる。画像は2.05MB→616KBに圧縮済み（`scripts/compress_map.py`、幅1600pxにリサイズ＋PNG256色量子化）。元画像は `assets/venue-map-original.png` に保存してあるので、地図が更新された場合はそちらを差し替えて同スクリプトを再実行すればよい。
+- **会場マップ**：当日配布MAPの画像（`assets/venue-map.jpg`）をマップタブ上部に表示、タップで拡大（ピンチズーム対応）。あわせて蔵元62件すべてにブース番号・エリア（A/B/C）を反映し、「エリア帯をタップ→蔵元一覧をそのエリアで絞り込み」も利用できる。地図が更新された場合は `assets/venue-map-original.jpg`（または`.png`）を新しい画像で上書きし、`python scripts/compress_map.py` を再実行すればよい（PNG量子化とJPEG圧縮の両方を試し、小さい方を自動選択する）。
 - **蔵元データ**：公式サイト記載（2026年8月）＋当日配布MAP（ブース番号）の組み合わせ。当日変更があれば `data/breweries.json` を直接編集して再デプロイ。
 - **フードデータ**：配布MAPにのみ記載の「Moi Moon」を追加、昼営業店舗・商店街店舗にマップ記号（A〜N）を反映済み。
 - **アイコン**：`scripts/gen_icons.py` によるプレースホルダー。本番前に正式なロゴへの差し替えを推奨。

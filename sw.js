@@ -1,4 +1,4 @@
-const CACHE_NAME = "jizake-street-2026-v2";
+const CACHE_NAME = "jizake-street-2026-v3";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -10,7 +10,7 @@ const CORE_ASSETS = [
   "./data/info.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./assets/venue-map.png"
+  "./assets/venue-map.jpg"
 ];
 
 self.addEventListener("install", (event) => {
