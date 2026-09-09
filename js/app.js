@@ -201,7 +201,7 @@ function zoneOf(booth){
 }
 
 async function loadBreweries(){
-  const res = await fetch("data/breweries.json");
+  const res = await fetch("data/breweries.json", { cache: "no-store" });
   breweryData = await res.json();
   renderBreweryFilters();
   renderBreweryList();
@@ -285,20 +285,22 @@ document.getElementById("brewery-search").addEventListener("input", renderBrewer
 
 // ==== フード ====
 let foodShops = [];
+let foodData = null;
 
 async function loadFood(){
-  const res = await fetch("data/food.json");
-  const data = await res.json();
+  const res = await fetch("data/food.json", { cache: "no-store" });
+  foodData = await res.json();
   foodShops = [];
   const box = document.getElementById("food-list");
-  box.innerHTML = data.groups.map(group => `
+  box.innerHTML = foodData.groups.map(group => `
     <div class="section-title">${escapeHtml(group.label)}</div>
     <div class="item-list">
       ${group.shops.map(shop => {
         const idx = foodShops.push(shop) - 1;
+        const zoneTag = shop.zone ? `<span class="booth-badge zone-badge">${escapeHtml(shop.zone)}ゾーン</span>` : "";
         return `
         <div class="item-row tappable" data-shop-idx="${idx}">
-          ${shop.mapLabel ? `<span class="booth-badge">${escapeHtml(shop.mapLabel)}</span>` : ""}
+          ${shop.mapLabel ? `<span class="booth-badge">${escapeHtml(shop.mapLabel)}</span>` : zoneTag}
           ${shop.image ? `<img class="thumb" src="${shop.image}" alt="" loading="lazy" onerror="this.style.display='none'">` : ""}
           <div class="item-main">
             <div class="name">${escapeHtml(shop.name)} ${shop.toilet ? '<span class="badge toilet">お手洗い可</span>' : ""}</div>
@@ -355,7 +357,7 @@ document.getElementById("map-lightbox-close").addEventListener("click", () => {
 
 // ==== インフォ ====
 async function loadInfo(){
-  const res = await fetch("data/info.json");
+  const res = await fetch("data/info.json", { cache: "no-store" });
   const data = await res.json();
 
   document.getElementById("header-sub").textContent =
@@ -377,6 +379,7 @@ async function loadInfo(){
           <span class="zlabel">${escapeHtml(z.label)}</span><br>
           <span class="zrange">${escapeHtml(z.range)}</span>
           <div class="zdesc">${escapeHtml(z.desc)}</div>
+          <div class="zfood" id="zfood-${z.id}"></div>
         </span>
       </button>
     `).join("")}
@@ -424,11 +427,25 @@ async function loadInfo(){
   `;
 }
 
+// ゾーンカードに、そのエリアの屋台を一覧で追記する（マップタブ）
+function renderZoneFood(){
+  if(!foodData) return;
+  const yatai = foodData.groups.find(g => g.id === "yatai");
+  if(!yatai) return;
+  ZONES.forEach(z => {
+    const el = document.getElementById(`zfood-${z.id}`);
+    if(!el) return;
+    const names = yatai.shops.filter(s => s.zone === z.id).map(s => s.name);
+    el.textContent = names.length ? `屋台: ${names.join("・")}` : "";
+  });
+}
+
 // ==== 初期化 ====
 (async function init(){
   showView(localStorage.getItem("js_last_tab") || "map");
   renderSakecho();
   await Promise.all([loadBreweries(), loadFood(), loadInfo()]);
+  renderZoneFood();
   startLivePolling();
 
   if("serviceWorker" in navigator){

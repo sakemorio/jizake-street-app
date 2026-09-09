@@ -1,22 +1,22 @@
 {
-  "note": "出典: https://jizake-st.com/ (2026年8月時点、写真リンク) ＋ 当日配布MAP（mapLabel）。",
+  "note": "出典: https://jizake-st.com/ (2026年8月時点、写真リンク) ＋ 当日配布MAP（mapLabel）＋ しげおさんヒアリング（屋台のzone、2026年9月時点）。",
   "groups": [
     {
       "id": "yatai",
       "label": "屋台形式（11時営業開始、14〜15時も営業）",
       "shops": [
-        { "name": "オデコマン", "menu": "立ち飲み天ぷら酒場・酒のアテ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/tuyoshi.jpg" },
-        { "name": "呑喰栄時", "menu": "太刀魚串焼き・お稲荷さん", "image": "https://jizake-st.com/wp-content/uploads/2025/08/eizi.jpg" },
-        { "name": "てっちこ", "menu": "白カレーもつ・豚のナンナン焼き", "image": "https://jizake-st.com/wp-content/uploads/2025/08/DSC01098.jpg" },
-        { "name": "こさむ鮨", "menu": "富士宮焼きそば・いか焼き等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/sam.jpg" },
-        { "name": "のへそ", "menu": "うなぎ蒲焼串・韓国おでん等", "image": "https://jizake-st.com/wp-content/uploads/2026/06/noheso1.jpg" },
-        { "name": "たこ助", "menu": "うなぎ肝焼き・天空椎茸等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/takosu.jpg" },
+        { "name": "オデコマン", "zone": "C", "menu": "立ち飲み天ぷら酒場・酒のアテ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/tuyoshi.jpg" },
+        { "name": "呑喰栄時", "zone": "B", "menu": "太刀魚串焼き・お稲荷さん", "image": "https://jizake-st.com/wp-content/uploads/2025/08/eizi.jpg" },
+        { "name": "てっちこ", "zone": "C", "menu": "白カレーもつ・豚のナンナン焼き", "image": "https://jizake-st.com/wp-content/uploads/2025/08/DSC01098.jpg" },
+        { "name": "こさむ鮨", "zone": "B", "menu": "富士宮焼きそば・いか焼き等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/sam.jpg" },
+        { "name": "のへそ", "zone": "A", "menu": "うなぎ蒲焼串・韓国おでん等", "image": "https://jizake-st.com/wp-content/uploads/2026/06/noheso1.jpg" },
+        { "name": "たこ助", "zone": "B", "menu": "うなぎ肝焼き・天空椎茸等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/takosu.jpg" },
         { "name": "なが田酒店", "menu": "タコス・フランクフルト等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/nagata.jpg" },
-        { "name": "ハワイ食堂LeaLea", "menu": "長芋のから揚げ・鶏のから揚げ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/lealea.jpg" },
-        { "name": "侍ホルモン", "menu": "三元豚熟成ハラミ焼き・牛タンマリネ", "image": "https://jizake-st.com/wp-content/uploads/2025/09/samuhoru.jpg" },
-        { "name": "まる両", "menu": "マグロの竜田揚げ・フランクフルト・ポテト", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2025/09/maru.jpg" },
-        { "name": "RAINBOW", "menu": "炭火焼きジャークチキン・ジャークフランク・せせり焼き", "image": "https://jizake-st.com/wp-content/uploads/2026/06/rainbow1.jpg" },
-        { "name": "ろぶ村", "menu": "セロリのマリネ・豚の角煮・鯵の南蛮漬け", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2026/08/robson.jpg" }
+        { "name": "ハワイ食堂LeaLea", "zone": "B", "menu": "長芋のから揚げ・鶏のから揚げ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/lealea.jpg" },
+        { "name": "侍ホルモン", "zone": "C", "menu": "三元豚熟成ハラミ焼き・牛タンマリネ", "image": "https://jizake-st.com/wp-content/uploads/2025/09/samuhoru.jpg" },
+        { "name": "まる両", "zone": "A", "menu": "マグロの竜田揚げ・フランクフルト・ポテト", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2025/09/maru.jpg" },
+        { "name": "RAINBOW", "zone": "C", "menu": "炭火焼きジャークチキン・ジャークフランク・せせり焼き", "image": "https://jizake-st.com/wp-content/uploads/2026/06/rainbow1.jpg" },
+        { "name": "ろぶ村", "zone": "B", "menu": "セロリのマリネ・豚の角煮・鯵の南蛮漬け", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2026/08/robson.jpg" }
       ]
     },
     {

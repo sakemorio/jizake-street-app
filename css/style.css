@@ -225,6 +225,8 @@ body{
 .zone-band .ztext .zlabel{ font-weight:700; font-size:14.5px; }
 .zone-band .ztext .zrange{ font-size:12px; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
 .zone-band .ztext .zdesc{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.zone-band .ztext .zfood{ font-size:12px; color:var(--hanko); margin-top:4px; }
+.zone-band .ztext .zfood:empty{ display:none; }
 .zone-station{
   text-align:center; font-size:12px; color:var(--ink-soft); padding:2px 0 10px;
   letter-spacing:.04em;
@@ -242,6 +244,7 @@ body{
   background:var(--indigo-tint); color:var(--indigo-deep); font-weight:700; font-size:12px;
   display:flex; align-items:center; justify-content:center; font-variant-numeric:tabular-nums;
 }
+.booth-badge.zone-badge{ min-width:auto; padding:0 8px; white-space:nowrap; }
 
 /* info view */
 .info-block{ margin-bottom:20px; }
