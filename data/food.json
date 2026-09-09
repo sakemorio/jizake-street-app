@@ -11,7 +11,7 @@
         { "name": "こさむ鮨", "zone": "B", "menu": "富士宮焼きそば・いか焼き等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/sam.jpg" },
         { "name": "のへそ", "zone": "A", "menu": "うなぎ蒲焼串・韓国おでん等", "image": "https://jizake-st.com/wp-content/uploads/2026/06/noheso1.jpg" },
         { "name": "たこ助", "zone": "B", "menu": "うなぎ肝焼き・天空椎茸等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/takosu.jpg" },
-        { "name": "なが田酒店", "menu": "タコス・フランクフルト等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/nagata.jpg" },
+        { "name": "なが田酒店", "zone": "A", "menu": "タコス・フランクフルト等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/nagata.jpg" },
         { "name": "ハワイ食堂LeaLea", "zone": "B", "menu": "長芋のから揚げ・鶏のから揚げ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/lealea.jpg" },
         { "name": "侍ホルモン", "zone": "C", "menu": "三元豚熟成ハラミ焼き・牛タンマリネ", "image": "https://jizake-st.com/wp-content/uploads/2025/09/samuhoru.jpg" },
         { "name": "まる両", "zone": "A", "menu": "マグロの竜田揚げ・フランクフルト・ポテト", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2025/09/maru.jpg" },
