@@ -71,49 +71,6 @@
     </div>
   </section>
 
-  <!-- ===== アンケート ===== -->
-  <section class="view" id="view-survey">
-    <div class="section-title">来場後アンケート</div>
-    <form id="survey-form">
-      <div class="survey-field">
-        <label>今回の地酒ストリートの満足度は？</label>
-        <div class="scale" data-field="satisfaction" data-max="5">
-          <button type="button" data-val="1">1</button>
-          <button type="button" data-val="2">2</button>
-          <button type="button" data-val="3">3</button>
-          <button type="button" data-val="4">4</button>
-          <button type="button" data-val="5">5</button>
-        </div>
-      </div>
-      <div class="survey-field">
-        <label>参加した回</label>
-        <select id="survey-session">
-          <option value="第一部のみ">第一部のみ（12:00〜14:00）</option>
-          <option value="第二部のみ">第二部のみ（15:00〜17:00）</option>
-          <option value="両方（1日券）">両方（1日券）</option>
-        </select>
-      </div>
-      <div class="survey-field">
-        <label>来場回数</label>
-        <select id="survey-visits">
-          <option value="初参加">初参加</option>
-          <option value="2〜3回目">2〜3回目</option>
-          <option value="4回目以上">4回目以上</option>
-        </select>
-      </div>
-      <div class="survey-field">
-        <label>良かった点</label>
-        <textarea id="survey-good" rows="3" placeholder="例：蔵元の数が多くて選ぶのが楽しかった"></textarea>
-      </div>
-      <div class="survey-field">
-        <label>改善してほしい点</label>
-        <textarea id="survey-improve" rows="3" placeholder="例：混雑していた時間帯があった"></textarea>
-      </div>
-      <button type="submit" class="btn">送信する</button>
-      <div id="survey-status" class="survey-status"></div>
-    </form>
-  </section>
-
   <!-- ===== インフォ ===== -->
   <section class="view" id="view-info">
     <div id="info-content"></div>
@@ -147,7 +104,6 @@
     <button class="tab-btn" data-view="breweries"><span class="ic">🍶</span>蔵元</button>
     <button class="tab-btn" data-view="food"><span class="ic">🍢</span>フード</button>
     <button class="tab-btn" data-view="sakecho"><span class="ic">📔</span>酒帳</button>
-    <button class="tab-btn" data-view="survey"><span class="ic">📝</span>アンケート</button>
     <button class="tab-btn" data-view="info"><span class="ic">ℹ️</span>インフォ</button>
   </nav>
 

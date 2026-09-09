@@ -8,7 +8,7 @@
 ```
 index.html         アプリ本体（タブ切り替えのシングルページ）
 css/style.css       スタイル
-js/app.js           データ読み込み・タブ切り替え・酒帳・アンケート送信ロジック
+js/app.js           データ読み込み・タブ切り替え・酒帳ロジック
 data/breweries.json 出展蔵元・銘柄（公式サイトより転記、booth番号は会場図入手後に追記）
 data/food.json      出展飲食店
 data/info.json      開催概要・ルール・タイムテーブル
@@ -38,47 +38,6 @@ python -m http.server 8080
 2. リポジトリの Settings → Pages → Branch を `main` / `/(root)` に設定
 3. 数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` で公開される
 4. スマホでアクセスし「ホーム画面に追加」でPWAとしてインストール可能
-
-## アンケートの送信先を設定する（Google Apps Script）
-
-現状は `js/app.js` の `SURVEY_ENDPOINT` が空のため、回答は各端末のブラウザに保存されるだけ（開発確認用）。
-本番では以下の手順でGoogleスプレッドシートに集約できる。
-
-1. Googleスプレッドシートを新規作成（例：「地酒ストリート2026 アンケート」）
-2. メニュー「拡張機能」→「Apps Script」を開く
-3. 以下のコードを貼り付けて保存
-
-   ```javascript
-   // セルの先頭が =+-@ などだとGoogleスプレッドシートに数式として解釈されてしまう
-   // （スプレッドシート版CSVインジェクション）ため、自由記述欄はそのまま書き込まず無害化する。
-   function sanitizeCell(value) {
-     const s = String(value == null ? "" : value);
-     return /^[=+\-@\t\r]/.test(s) ? "'" + s : s;
-   }
-
-   function doPost(e) {
-     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     const data = JSON.parse(e.postData.contents);
-     sheet.appendRow([
-       new Date(),
-       sanitizeCell(data.satisfaction),
-       sanitizeCell(data.session),
-       sanitizeCell(data.visits),
-       sanitizeCell(data.good),
-       sanitizeCell(data.improve)
-     ]);
-     return ContentService.createTextOutput(JSON.stringify({ result: "ok" }))
-       .setMimeType(ContentService.MimeType.JSON);
-   }
-   ```
-
-4. 「デプロイ」→「新しいデプロイ」→ 種類「ウェブアプリ」
-   - 実行するユーザー：自分
-   - アクセスできるユーザー：全員
-5. 発行されたウェブアプリのURLを `js/app.js` 冒頭の `SURVEY_ENDPOINT` に設定する
-6. 再デプロイ（GitHub Pagesの場合は再push）
-
-※ `fetch` は `mode: "no-cors"` で送信しているため、送信の成否はレスポンス内容では判定できない（Apps Script側のCORS制約による標準的な回避策）。アプリ側は送信リクエストが例外なく完了した時点で成功として扱う。
 
 ## 当日の「完売」「お知らせ」をスマホからリアルタイム更新する（Google Apps Script）
 

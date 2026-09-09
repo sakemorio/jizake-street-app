@@ -257,29 +257,11 @@ a.btn, button.btn{
   padding:11px 18px; border-radius:8px; border:none; cursor:pointer; width:100%;
 }
 
-/* survey */
-.survey-field{ margin-bottom:18px; }
-.survey-field label{ display:block; font-size:14px; font-weight:700; margin-bottom:8px; }
-.scale{ display:flex; gap:6px; }
-.scale button{
-  flex:1; padding:10px 0; border-radius:8px; border:1px solid var(--line);
-  background:var(--surface); color:var(--ink-soft); font-weight:700; font-size:14px;
-  cursor:pointer;
-}
-.scale button.on{ background:var(--indigo); border-color:var(--indigo); color:#fff; }
-textarea, select{
-  width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--line);
-  background:var(--surface); color:var(--ink); font-size:14.5px; font-family:inherit; resize:vertical;
-}
-.survey-status{ font-size:13.5px; margin-top:10px; text-align:center; }
-.survey-status.ok{ color:var(--good); }
-.survey-status.err{ color:var(--hanko); }
-
 /* bottom nav */
 .tabbar{
   position:fixed; bottom:0; left:0; right:0; z-index:20;
   max-width:520px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(6,1fr);
+  display:grid; grid-template-columns:repeat(5,1fr);
   background:var(--surface); border-top:1px solid var(--line);
   padding-bottom:var(--safe-bottom);
 }

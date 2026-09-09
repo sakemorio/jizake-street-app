@@ -1,8 +1,4 @@
 // ==== 設定 ====
-// Google Apps Script のウェブアプリ URL をここに設定するとアンケートがスプレッドシートに送信される。
-// 未設定の間はローカル保存のみ（開発確認用）。設定手順は README.md 参照。
-const SURVEY_ENDPOINT = "";
-
 // 会場スタッフがスマホから更新する「完売」「お知らせ」のライブ状況を読み込むURL。
 // Google Apps Script（doGet）で完売ブース番号とお知らせ文を返すウェブアプリを設定する。
 // 未設定の間はこの機能はオフ（完売バッジ・お知らせバーは出ない）。設定手順は README.md 参照。
@@ -14,6 +10,7 @@ const tabButtons = document.querySelectorAll(".tab-btn");
 const views = document.querySelectorAll(".view");
 
 function showView(name){
+  if(!document.getElementById(`view-${name}`)) name = "map"; // 廃止されたタブが残っていた場合の保険
   views.forEach(v => v.classList.toggle("active", v.id === `view-${name}`));
   tabButtons.forEach(b => b.classList.toggle("active", b.dataset.view === name));
   localStorage.setItem("js_last_tab", name);
@@ -426,69 +423,6 @@ async function loadInfo(){
     </div>
   `;
 }
-
-// ==== アンケート ====
-const surveyState = { satisfaction: null };
-
-document.querySelectorAll('.scale[data-field="satisfaction"] button').forEach(btn => {
-  btn.addEventListener("click", () => {
-    surveyState.satisfaction = btn.dataset.val;
-    btn.parentElement.querySelectorAll("button").forEach(b => b.classList.toggle("on", b === btn));
-  });
-});
-
-document.getElementById("survey-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const statusEl = document.getElementById("survey-status");
-  const payload = {
-    satisfaction: surveyState.satisfaction || "",
-    session: document.getElementById("survey-session").value,
-    visits: document.getElementById("survey-visits").value,
-    good: document.getElementById("survey-good").value.trim(),
-    improve: document.getElementById("survey-improve").value.trim(),
-    submittedAt: new Date().toISOString()
-  };
-
-  if(!payload.satisfaction){
-    statusEl.textContent = "満足度を選択してください。";
-    statusEl.className = "survey-status err";
-    return;
-  }
-
-  // ローカルにも常に保存（送信先未設定時の開発用バックアップ）
-  const localKey = "js_survey_responses";
-  const local = JSON.parse(localStorage.getItem(localKey) || "[]");
-  local.push(payload);
-  localStorage.setItem(localKey, JSON.stringify(local));
-
-  if(!SURVEY_ENDPOINT){
-    statusEl.textContent = "送信しました（送信先未設定のためこの端末に保存されました）";
-    statusEl.className = "survey-status ok";
-    document.getElementById("survey-form").reset();
-    surveyState.satisfaction = null;
-    document.querySelectorAll('.scale[data-field="satisfaction"] button').forEach(b => b.classList.remove("on"));
-    return;
-  }
-
-  try{
-    statusEl.textContent = "送信中…";
-    statusEl.className = "survey-status";
-    await fetch(SURVEY_ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    statusEl.textContent = "ご回答ありがとうございました！";
-    statusEl.className = "survey-status ok";
-    document.getElementById("survey-form").reset();
-    surveyState.satisfaction = null;
-    document.querySelectorAll('.scale[data-field="satisfaction"] button').forEach(b => b.classList.remove("on"));
-  }catch(err){
-    statusEl.textContent = "送信に失敗しました。電波の良い場所で再度お試しください。";
-    statusEl.className = "survey-status err";
-  }
-});
 
 // ==== 初期化 ====
 (async function init(){
