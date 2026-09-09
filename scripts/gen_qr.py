@@ -6,8 +6,18 @@ import os
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 os.makedirs(OUT_DIR, exist_ok=True)
 OUT_PATH = os.path.join(OUT_DIR, "qr-card.png")
+CHAR_SRC = os.path.join(OUT_DIR, "character-source.png")
 
 URL = "https://sakemorio.github.io/jizake-street-app/"
+
+CHARACTER = Image.open(CHAR_SRC).convert("RGBA")
+
+def fit_character(max_w, max_h):
+    """character-source.png をアスペクト比を保ったまま max_w x max_h に収める（原画そのまま、描き直しなし）"""
+    w, h = CHARACTER.size
+    ratio = min(max_w / w, max_h / h)
+    new_size = (max(1, int(w * ratio)), max(1, int(h * ratio)))
+    return CHARACTER.resize(new_size, Image.LANCZOS)
 
 # ==== 配色（アプリ本体と統一） ====
 PAPER = (243, 241, 231, 255)
@@ -33,60 +43,15 @@ qr.make(fit=True)
 qr_img = qr.make_image(fill_color=INDIGO, back_color=PAPER).convert("RGBA")
 qr_size = qr_img.size[0]
 
-# ==== 2) QR中央に小さな「酒くん」ロゴを重ねる（円形の背景であまり大きくしない） ====
-def draw_bottle_face(draw, cx, cy, w, h, body_color=INDIGO, line_color=PAPER, blush=True, heart=False):
-    """オリジナルの「お酒くん」キャラクター（瓶＋顔）を描く。公式イラストの模写ではない独自デザイン。"""
-    neck_w = w * 0.34
-    neck_h = h * 0.22
-    body_top = cy - h / 2 + neck_h
-    body_bottom = cy + h / 2
-    body_left = cx - w / 2
-    body_right = cx + w / 2
-
-    # 首
-    draw.rounded_rectangle(
-        [cx - neck_w / 2, cy - h / 2, cx + neck_w / 2, body_top + h * 0.06],
-        radius=neck_w * 0.25, fill=body_color
-    )
-    # キャップ
-    cap_w = neck_w * 0.9
-    draw.rounded_rectangle(
-        [cx - cap_w / 2, cy - h / 2 - h * 0.07, cx + cap_w / 2, cy - h / 2 + h * 0.05],
-        radius=cap_w * 0.3, fill=line_color
-    )
-    # 本体
-    draw.rounded_rectangle(
-        [body_left, body_top, body_right, body_bottom],
-        radius=w * 0.22, fill=body_color
-    )
-    # 顔（目・口）
-    eye_r = w * 0.045
-    eye_y = body_top + (body_bottom - body_top) * 0.42
-    draw.ellipse([cx - w * 0.16 - eye_r, eye_y - eye_r, cx - w * 0.16 + eye_r, eye_y + eye_r], fill=line_color)
-    draw.ellipse([cx + w * 0.16 - eye_r, eye_y - eye_r, cx + w * 0.16 + eye_r, eye_y + eye_r], fill=line_color)
-    smile_w = w * 0.22
-    smile_y = eye_y + h * 0.12
-    draw.arc([cx - smile_w / 2, smile_y - smile_w / 4, cx + smile_w / 2, smile_y + smile_w / 2],
-              start=20, end=160, fill=line_color, width=max(2, int(w * 0.02)))
-    if blush:
-        blush_r = w * 0.035
-        blush_y = eye_y + h * 0.05
-        for sign in (-1, 1):
-            bx = cx + sign * w * 0.26
-            draw.ellipse([bx - blush_r, blush_y - blush_r, bx + blush_r, blush_y + blush_r], fill=HANKO)
-    if heart:
-        hr = w * 0.09
-        hx, hy = cx + w * 0.34, body_top - h * 0.02
-        draw.ellipse([hx - hr, hy - hr * 0.6, hx, hy + hr * 0.6], fill=HANKO)
-        draw.ellipse([hx, hy - hr * 0.6, hx + hr, hy + hr * 0.6], fill=HANKO)
-        draw.polygon([(hx - hr, hy + hr * 0.15), (hx + hr, hy + hr * 0.15), (hx, hy + hr * 1.5)], fill=HANKO)
-
-
+# ==== 2) QR中央に「日本酒くん」ロゴ（原画）を重ねる（円形の背景であまり大きくしない） ====
 logo_d = int(qr_size * 0.30)  # QR幅の30%の円（誤り訂正H=最大約30%まで復元可能なため十分安全なマージンを確保）
 logo_layer = Image.new("RGBA", (logo_d, logo_d), (0, 0, 0, 0))
 ld = ImageDraw.Draw(logo_layer)
 ld.ellipse([0, 0, logo_d, logo_d], fill=PAPER, outline=INDIGO, width=max(3, logo_d // 22))
-draw_bottle_face(ld, logo_d / 2, logo_d / 2 + logo_d * 0.03, logo_d * 0.5, logo_d * 0.62, blush=True, heart=False)
+logo_char = fit_character(int(logo_d * 0.82), int(logo_d * 0.82))
+lc_x = (logo_d - logo_char.width) // 2
+lc_y = (logo_d - logo_char.height) // 2
+logo_layer.alpha_composite(logo_char, (lc_x, lc_y))
 qr_img.alpha_composite(logo_layer, ((qr_size - logo_d) // 2, (qr_size - logo_d) // 2))
 
 # ==== 3) カード全体を組み立てる ====
@@ -118,13 +83,11 @@ qr_x = PAD
 qr_y = HEADER_H
 card.alpha_composite(qr_img, (qr_x, qr_y))
 
-# 大きい「お酒くん」キャラクターは右側の専用パネル内（QRとは重ならない）に縦centerで配置
-panel_cx = qr_x + qr_size + CHAR_PANEL_W / 2
-panel_cy = qr_y + qr_size / 2
-char_layer = Image.new("RGBA", (CHAR_PANEL_W, qr_size), (0, 0, 0, 0))
-cd = ImageDraw.Draw(char_layer)
-draw_bottle_face(cd, CHAR_PANEL_W / 2, qr_size / 2, CHAR_PANEL_W * 0.62, qr_size * 0.34, blush=True, heart=True)
-card.alpha_composite(char_layer, (qr_x + qr_size, qr_y))
+# 大きい「日本酒くん」（原画）は右側の専用パネル内（QRとは重ならない）に縦centerで配置
+big_char = fit_character(int(CHAR_PANEL_W * 0.92), int(qr_size * 0.55))
+bx = qr_x + qr_size + (CHAR_PANEL_W - big_char.width) // 2
+by = qr_y + (qr_size - big_char.height) // 2
+card.alpha_composite(big_char, (bx, by))
 
 # キャプション
 cap = "QRを読み込んでアプリをチェック！"
