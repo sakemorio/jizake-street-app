@@ -19,6 +19,22 @@ sw.js               Service Worker（オフラインキャッシュ）
 icons/              PWAアイコン（プレースホルダー、差し替え可）
 scripts/gen_icons.py アイコン生成スクリプト（Python + Pillow）
 scripts/compress_map.py 会場マップ画像の圧縮スクリプト（Python + Pillow）
+scripts/gen_qr.py   告知用QRコード画像の生成スクリプト（Python + qrcode + Pillow、assets/qr-card.png を出力）
+```
+
+## 告知用QRコードを作る
+
+`assets/qr-card.png` は、アプリのURLへのQRコード＋オリジナルキャラクター入りの配布用カード画像。
+
+```bash
+python -m pip install qrcode pillow
+python scripts/gen_qr.py
+```
+
+誤り訂正レベルH（最大約30%まで破損・被覆に耐えられる）で生成しており、中央のロゴ被覆はQR面積の1割未満に抑えているため、印刷して問題なく読み取れる。生成後は以下でスキャン確認できる（要 `opencv-python-headless`）。
+
+```bash
+python -c "import cv2; img=cv2.imread('assets/qr-card.png'); print(cv2.QRCodeDetector().detectAndDecode(img)[0])"
 ```
 
 ## ローカルで確認する
