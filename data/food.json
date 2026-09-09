@@ -1,0 +1,50 @@
+{
+  "note": "出典: https://jizake-st.com/ (2026年8月時点、写真リンク) ＋ 当日配布MAP（mapLabel）。",
+  "groups": [
+    {
+      "id": "yatai",
+      "label": "屋台形式（11時営業開始、14〜15時も営業）",
+      "shops": [
+        { "name": "オデコマン", "menu": "立ち飲み天ぷら酒場・酒のアテ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/tuyoshi.jpg" },
+        { "name": "呑喰栄時", "menu": "太刀魚串焼き・お稲荷さん", "image": "https://jizake-st.com/wp-content/uploads/2025/08/eizi.jpg" },
+        { "name": "てっちこ", "menu": "白カレーもつ・豚のナンナン焼き", "image": "https://jizake-st.com/wp-content/uploads/2025/08/DSC01098.jpg" },
+        { "name": "こさむ鮨", "menu": "富士宮焼きそば・いか焼き等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/sam.jpg" },
+        { "name": "のへそ", "menu": "うなぎ蒲焼串・韓国おでん等", "image": "https://jizake-st.com/wp-content/uploads/2026/06/noheso1.jpg" },
+        { "name": "たこ助", "menu": "うなぎ肝焼き・天空椎茸等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/takosu.jpg" },
+        { "name": "なが田酒店", "menu": "タコス・フランクフルト等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/nagata.jpg" },
+        { "name": "ハワイ食堂LeaLea", "menu": "長芋のから揚げ・鶏のから揚げ等", "image": "https://jizake-st.com/wp-content/uploads/2025/08/lealea.jpg" },
+        { "name": "侍ホルモン", "menu": "三元豚熟成ハラミ焼き・牛タンマリネ", "image": "https://jizake-st.com/wp-content/uploads/2025/09/samuhoru.jpg" },
+        { "name": "まる両", "menu": "マグロの竜田揚げ・フランクフルト・ポテト", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2025/09/maru.jpg" },
+        { "name": "RAINBOW", "menu": "炭火焼きジャークチキン・ジャークフランク・せせり焼き", "image": "https://jizake-st.com/wp-content/uploads/2026/06/rainbow1.jpg" },
+        { "name": "ろぶ村", "menu": "セロリのマリネ・豚の角煮・鯵の南蛮漬け", "toilet": true, "image": "https://jizake-st.com/wp-content/uploads/2026/08/robson.jpg" }
+      ]
+    },
+    {
+      "id": "lunch",
+      "label": "昼営業店舗（店内エアコン・持ち込み不可・お手洗い使用可）",
+      "shops": [
+        { "name": "バチカン", "mapLabel": "A", "image": "https://jizake-st.com/wp-content/uploads/2025/09/bachikan2.jpg" },
+        { "name": "目利きの銀次", "mapLabel": "B", "image": "https://jizake-st.com/wp-content/uploads/2025/09/DSC01084.jpg" },
+        { "name": "えにし", "mapLabel": "C", "image": "https://jizake-st.com/wp-content/uploads/2025/09/enisi.jpg" },
+        { "name": "さかなや道場", "mapLabel": "D", "image": "https://jizake-st.com/wp-content/uploads/2025/09/sakanaya.jpg" },
+        { "name": "なが田酒店", "mapLabel": "E", "image": "https://jizake-st.com/wp-content/uploads/2025/08/nagata.jpg" },
+        { "name": "イタリアンバル Glow up", "mapLabel": "F", "image": "https://jizake-st.com/wp-content/uploads/2025/09/glowup.jpg" },
+        { "name": "Moi Moon", "mapLabel": "G" }
+      ]
+    },
+    {
+      "id": "shotengai",
+      "label": "駅前銀座商店街店舗",
+      "shops": [
+        { "name": "村越くだもの店", "mapLabel": "I", "menu": "フルーツジュース・果物等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten1.jpg" },
+        { "name": "柏屋", "mapLabel": "H", "menu": "酒立ち飲み【有料】/ 黒はんぺん甘辛煮等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten2.jpg" },
+        { "name": "惣菜キッチン蒲原", "mapLabel": "M", "menu": "各種惣菜等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten4.jpg" },
+        { "name": "蒲原屋", "mapLabel": "L", "menu": "豆・乾物等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten5.jpg" },
+        { "name": "松尾商店", "mapLabel": "K", "menu": "乾物等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten6.jpg" },
+        { "name": "次郎長屋", "mapLabel": "J", "menu": "味噌・佃煮等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten7.jpg" },
+        { "name": "サリエ", "menu": "アイシングクッキー", "image": "https://jizake-st.com/wp-content/uploads/2026/06/sarie.jpg" },
+        { "name": "矢入鮮魚店", "mapLabel": "N", "menu": "煮付け等", "image": "https://jizake-st.com/wp-content/uploads/2025/09/syoten8.jpg" }
+      ]
+    }
+  ]
+}

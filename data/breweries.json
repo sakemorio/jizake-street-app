@@ -1,0 +1,103 @@
+{
+  "note": "出典: https://jizake-st.com/ 公式サイト（品名）＋ 当日配布MAP（ブース番号・ゾーン）2026年9月時点。",
+  "categories": [
+    {
+      "id": "sake",
+      "label": "日本酒",
+      "items": [
+        { "name": "AKABU", "booth": 1 },
+        { "name": "臥龍梅", "booth": 2 },
+        { "name": "大信州", "booth": 3 },
+        { "name": "駿州中屋", "booth": 4 },
+        { "name": "HIRAN", "booth": 5 },
+        { "name": "美丈夫", "booth": 6 },
+        { "name": "会津中将", "booth": 7 },
+        { "name": "ちえびじん", "booth": 8 },
+        { "name": "志太泉", "booth": 9 },
+        { "name": "山城屋", "booth": 10 },
+        { "name": "来福", "booth": 11 },
+        { "name": "獺祭", "booth": 12 },
+        { "name": "開運", "booth": 13 },
+        { "name": "彩來", "booth": 14 },
+        { "name": "澤の花", "booth": 15 },
+        { "name": "鍋島", "booth": 16 },
+        { "name": "奈良萬", "booth": 17 },
+        { "name": "神尾", "booth": 18 },
+        { "name": "乾坤一", "booth": 19 },
+        { "name": "楯野川", "booth": 20 },
+        { "name": "田酒", "booth": 21 },
+        { "name": "善吉", "booth": 22 },
+        { "name": "喜久醉", "booth": 23 },
+        { "name": "福海", "booth": 24 },
+        { "name": "紀土", "booth": 25 },
+        { "name": "杉錦", "booth": 26 },
+        { "name": "山和", "booth": 27 },
+        { "name": "天宝一", "booth": 28 },
+        { "name": "大那", "booth": 29 },
+        { "name": "一白水成", "booth": 30 },
+        { "name": "黒龍", "booth": 31 },
+        { "name": "英君", "booth": 32 },
+        { "name": "大嶺", "booth": 33 },
+        { "name": "孝の司", "booth": 34 },
+        { "name": "麒麟山", "booth": 35 },
+        { "name": "梅乃宿", "booth": 36 },
+        { "name": "仙禽", "booth": 51 },
+        { "name": "正雪", "booth": 52 },
+        { "name": "早瀬浦", "booth": 53 },
+        { "name": "土佐しらぎく", "booth": 54 },
+        { "name": "若竹", "booth": 55 },
+        { "name": "豊香", "booth": 56 },
+        { "name": "初亀", "booth": 57 },
+        { "name": "東洋美人", "booth": 58 },
+        { "name": "八海山", "booth": 59 },
+        { "name": "白隠正宗", "booth": 60 },
+        { "name": "甍", "booth": 61 },
+        { "name": "而今", "booth": 62 }
+      ]
+    },
+    {
+      "id": "shochu",
+      "label": "焼酎",
+      "items": [
+        { "name": "百年の孤独", "booth": 43 },
+        { "name": "特蒸泰明", "booth": 44 },
+        { "name": "久保", "booth": 45 },
+        { "name": "山大一", "booth": 46 },
+        { "name": "赤兎馬", "booth": 47 },
+        { "name": "やきいも黒瀬", "booth": 48 },
+        { "name": "富乃宝山", "booth": 49 },
+        { "name": "いも麹芋", "booth": 50 }
+      ]
+    },
+    {
+      "id": "whisky",
+      "label": "ウイスキー",
+      "items": [
+        { "name": "ガイアフロー静岡蒸溜所", "booth": 39 },
+        { "name": "井川蒸溜所", "booth": 40 },
+        { "name": "マルスウイスキー", "booth": 41 }
+      ]
+    },
+    {
+      "id": "gin",
+      "label": "ジン",
+      "items": [
+        { "name": "静岡アオイジン", "booth": 38 }
+      ]
+    },
+    {
+      "id": "wine",
+      "label": "ワイン",
+      "items": [
+        { "name": "勝沼醸造", "booth": 37 }
+      ]
+    },
+    {
+      "id": "other",
+      "label": "健康飲料",
+      "items": [
+        { "name": "ビワミン", "booth": 42 }
+      ]
+    }
+  ]
+}

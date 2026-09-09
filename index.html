@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>地酒ストリート2026</title>
+<meta name="theme-color" content="#22456B">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="app-header">
+    <h1>地酒ストリート2026</h1>
+    <div class="sub" id="header-sub">清水駅前銀座商店街 ／ 9月13日(日) 12:00〜17:00</div>
+  </header>
+
+  <div class="notice-bar" id="notice-bar" hidden></div>
+
+  <!-- ===== マップ ===== -->
+  <section class="view" id="view-map">
+    <button type="button" class="map-image-card" id="map-image-open">
+      <img src="assets/venue-map.png" alt="当日配布MAP（清水駅前銀座商店街 会場図）" loading="lazy">
+      <span class="map-image-hint">🔍 タップで拡大</span>
+    </button>
+
+    <div class="zone-strip" id="zone-strip"></div>
+    <div class="empty-note" style="padding:4px 4px 14px;">エリアをタップすると、蔵元一覧をそのエリアだけに絞り込めます。番号は当日配布MAPのブース番号と共通です。</div>
+
+    <div class="section-title">会場設備</div>
+    <div id="facility-list"></div>
+
+    <div class="section-title">アクセス</div>
+    <div class="card" id="map-access"></div>
+  </section>
+
+  <!-- ===== 蔵元・銘柄 ===== -->
+  <section class="view" id="view-breweries">
+    <div class="search-box">
+      <input type="search" id="brewery-search" placeholder="蔵元・銘柄名で検索">
+    </div>
+    <div class="chip-row" id="brewery-filters"></div>
+    <div class="chip-row" id="brewery-zone-filters"></div>
+    <div class="empty-note" style="padding:0 4px 14px; text-align:left;">右のボタンをタップするたびに記録が1件増えます（同じ蔵元で何杯飲んでもOK）。数字は記録した本数。削除・銘柄の書き分けは「酒帳」タブで。</div>
+    <div id="brewery-list"></div>
+  </section>
+
+  <!-- ===== フード ===== -->
+  <section class="view" id="view-food">
+    <div id="food-list"></div>
+  </section>
+
+  <!-- ===== 酒帳 ===== -->
+  <section class="view" id="view-sakecho">
+    <div class="sakecho-header">
+      <div class="section-title" style="margin:0;">飲んだ酒の記録</div>
+      <button type="button" class="sakecho-add-btn" id="sakecho-add">＋ 記録を追加</button>
+    </div>
+    <div id="sakecho-list"></div>
+    <div id="sakecho-empty" class="empty-note" style="display:none;">まだ記録がありません。「蔵元・銘柄」タブで丸ボタンをタップするか、上の「＋ 記録を追加」から銘柄と評価を記入できます。</div>
+    <div class="section-title">気になったお酒の購入</div>
+    <div class="card">
+      記録した銘柄は、久保山酒店ネットショップで購入できる場合があります（在庫状況により変動）。
+      <div style="margin-top:10px;">
+        <a class="btn" href="https://kubo-yama.com/" target="_blank" rel="noopener">久保山酒店ネットショップへ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== アンケート ===== -->
+  <section class="view" id="view-survey">
+    <div class="section-title">来場後アンケート</div>
+    <form id="survey-form">
+      <div class="survey-field">
+        <label>今回の地酒ストリートの満足度は？</label>
+        <div class="scale" data-field="satisfaction" data-max="5">
+          <button type="button" data-val="1">1</button>
+          <button type="button" data-val="2">2</button>
+          <button type="button" data-val="3">3</button>
+          <button type="button" data-val="4">4</button>
+          <button type="button" data-val="5">5</button>
+        </div>
+      </div>
+      <div class="survey-field">
+        <label>参加した回</label>
+        <select id="survey-session">
+          <option value="第一部のみ">第一部のみ（12:00〜14:00）</option>
+          <option value="第二部のみ">第二部のみ（15:00〜17:00）</option>
+          <option value="両方（1日券）">両方（1日券）</option>
+        </select>
+      </div>
+      <div class="survey-field">
+        <label>来場回数</label>
+        <select id="survey-visits">
+          <option value="初参加">初参加</option>
+          <option value="2〜3回目">2〜3回目</option>
+          <option value="4回目以上">4回目以上</option>
+        </select>
+      </div>
+      <div class="survey-field">
+        <label>良かった点</label>
+        <textarea id="survey-good" rows="3" placeholder="例：蔵元の数が多くて選ぶのが楽しかった"></textarea>
+      </div>
+      <div class="survey-field">
+        <label>改善してほしい点</label>
+        <textarea id="survey-improve" rows="3" placeholder="例：混雑していた時間帯があった"></textarea>
+      </div>
+      <button type="submit" class="btn">送信する</button>
+      <div id="survey-status" class="survey-status"></div>
+    </form>
+  </section>
+
+  <!-- ===== インフォ ===== -->
+  <section class="view" id="view-info">
+    <div id="info-content"></div>
+  </section>
+
+  <!-- ===== 会場マップ拡大表示 ===== -->
+  <div class="lightbox-overlay" id="map-lightbox" aria-hidden="true">
+    <button type="button" class="modal-close" id="map-lightbox-close" aria-label="閉じる">✕</button>
+    <div class="lightbox-scroll">
+      <img src="assets/venue-map.png" alt="当日配布MAP（清水駅前銀座商店街 会場図）">
+    </div>
+    <div class="lightbox-hint">ピンチで拡大・ドラッグで移動できます</div>
+  </div>
+
+  <!-- ===== 店舗詳細モーダル ===== -->
+  <div class="modal-overlay" id="detail-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+      <button type="button" class="modal-close" id="detail-close" aria-label="閉じる">✕</button>
+      <div class="modal-image-wrap">
+        <img id="detail-image" alt="">
+      </div>
+      <div class="modal-body">
+        <h3 id="detail-name"></h3>
+        <p id="detail-menu"></p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="tabbar">
+    <button class="tab-btn active" data-view="map"><span class="ic">🗺️</span>マップ</button>
+    <button class="tab-btn" data-view="breweries"><span class="ic">🍶</span>蔵元</button>
+    <button class="tab-btn" data-view="food"><span class="ic">🍢</span>フード</button>
+    <button class="tab-btn" data-view="sakecho"><span class="ic">📔</span>酒帳</button>
+    <button class="tab-btn" data-view="survey"><span class="ic">📝</span>アンケート</button>
+    <button class="tab-btn" data-view="info"><span class="ic">ℹ️</span>インフォ</button>
+  </nav>
+
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

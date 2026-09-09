@@ -1,0 +1,17 @@
+{
+  "name": "地酒ストリート2026",
+  "short_name": "地酒ストリート",
+  "description": "清水駅前銀座商店街「地酒ストリート2026」公式アプリ — 蔵元・フード情報とアンケート",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3F1E7",
+  "theme_color": "#22456B",
+  "lang": "ja",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
