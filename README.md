@@ -62,8 +62,8 @@ python -m http.server 8080
 
 1. Googleスプレッドシートを新規作成（例：「地酒ストリート2026 ライブ状況」）
 2. シート名を1つ目「完売」、2つ目「お知らせ」に変更し、それぞれ1行目に見出しを入れる
-   - 「完売」シート：A列＝`番号`、B列＝`完売`（チェックボックスにすると現場で扱いやすい：範囲を選択→メニュー「挿入」→「チェックボックス」）
-   - 「お知らせ」シート：A列＝`内容`、B列＝`表示`（同じくチェックボックス推奨）。複数行書いてもよいが、実際にバーに出るのは「表示」がONの最初の1件だけ
+   - 「完売」シート：A列＝`番号`、B列＝`完売`、C列＝`残りわずか`（B・Cともチェックボックスにすると現場で扱いやすい：範囲を選択→メニュー「挿入」→「チェックボックス」）。両方チェックした場合は「完売」が優先表示される
+   - 「お知らせ」シート：A列＝`内容`（表示したい文章）、B列＝`表示`（チェックボックス）。**A列に文章、B列にチェック**という並びを間違えないこと。複数行書いてもよいが、実際にバーに出るのは「表示」がONの一番上の行だけ
 3. メニュー「拡張機能」→「Apps Script」を開き、以下を貼り付けて保存
 
    ```javascript
@@ -72,9 +72,13 @@ python -m http.server 8080
      const soldSheet = ss.getSheetByName("完売");
      const noticeSheet = ss.getSheetByName("お知らせ");
 
-     const soldOut = soldSheet.getDataRange().getValues()
-       .slice(1)
+     const soldRows = soldSheet.getDataRange().getValues().slice(1);
+     const soldOut = soldRows
        .filter(row => row[1] === true)
+       .map(row => Number(row[0]))
+       .filter(n => !isNaN(n));
+     const lowStock = soldRows
+       .filter(row => row[2] === true)
        .map(row => Number(row[0]))
        .filter(n => !isNaN(n));
 
@@ -82,10 +86,12 @@ python -m http.server 8080
      const activeNotice = noticeRows.find(row => row[1] === true && row[0]);
      const notice = activeNotice ? String(activeNotice[0]) : "";
 
-     return ContentService.createTextOutput(JSON.stringify({ soldOut, notice }))
+     return ContentService.createTextOutput(JSON.stringify({ soldOut, lowStock, notice }))
        .setMimeType(ContentService.MimeType.JSON);
    }
    ```
+
+   ※ すでにデプロイ済みで、コードだけ書き換える場合は「デプロイ」→「デプロイを管理」→ 鉛筆（編集）アイコン→ バージョンを「新バージョン」にして「デプロイ」を押さないと、コードの変更が反映されない。
 
 4. 「デプロイ」→「新しいデプロイ」→ 種類「ウェブアプリ」
    - 実行するユーザー：自分

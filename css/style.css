@@ -10,6 +10,8 @@
   --hanko-tint:#F3DFD9;
   --line:#DAD6C8;
   --good:#2E7D4F;
+  --warn:#9A6B12;
+  --warn-tint:#F3E7CC;
   --safe-bottom:env(safe-area-inset-bottom, 0px);
 }
 
@@ -26,6 +28,8 @@
     --hanko-tint:#332320;
     --line:#33393E;
     --good:#63C58A;
+    --warn:#E0B655;
+    --warn-tint:#3A3120;
   }
 }
 
@@ -121,6 +125,7 @@ body{
 }
 .badge.toilet{ background:var(--indigo-tint); color:var(--indigo-deep); }
 .badge.soldout{ background:var(--hanko-tint); color:var(--hanko); }
+.badge.lowstock{ background:var(--warn-tint); color:var(--warn); }
 
 /* リアルタイムお知らせバー */
 .notice-bar{
@@ -131,6 +136,7 @@ body{
 
 .item-row.soldout .name{ color:var(--ink-soft); text-decoration:line-through; }
 .item-row.soldout .booth-badge{ background:var(--hanko-tint); color:var(--hanko); }
+.item-row.lowstock .booth-badge{ background:var(--warn-tint); color:var(--warn); }
 
 .empty-note{
   color:var(--ink-soft); font-size:13.5px; padding:20px 4px; text-align:center;

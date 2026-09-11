@@ -148,8 +148,8 @@ function escapeHtml(str){
   }[c]));
 }
 
-// ==== ライブ状況（完売・お知らせ） ====
-let liveData = { soldOut: [], notice: "" };
+// ==== ライブ状況（完売・残りわずか・お知らせ） ====
+let liveData = { soldOut: [], lowStock: [], notice: "" };
 
 async function loadLiveStatus(){
   if(!LIVE_ENDPOINT) return;
@@ -158,6 +158,7 @@ async function loadLiveStatus(){
     const data = await res.json();
     liveData = {
       soldOut: Array.isArray(data.soldOut) ? data.soldOut.map(Number) : [],
+      lowStock: Array.isArray(data.lowStock) ? data.lowStock.map(Number) : [],
       notice: typeof data.notice === "string" ? data.notice : ""
     };
   }catch(e){
@@ -257,11 +258,15 @@ function renderBreweryList(){
     html += items.map(item => {
       const count = drankCounts[item.name] || 0;
       const soldOut = liveData.soldOut.includes(item.booth);
+      const lowStock = !soldOut && liveData.lowStock.includes(item.booth);
+      const statusBadge = soldOut
+        ? '<span class="badge soldout">完売</span>'
+        : lowStock ? '<span class="badge lowstock">残りわずか</span>' : "";
       return `
-      <div class="item-row ${soldOut ? "soldout" : ""}">
+      <div class="item-row ${soldOut ? "soldout" : ""} ${lowStock ? "lowstock" : ""}">
         <span class="booth-badge">${item.booth}</span>
         <div class="item-main">
-          <div class="name">${escapeHtml(item.name)} ${soldOut ? '<span class="badge soldout">完売</span>' : ""}</div>
+          <div class="name">${escapeHtml(item.name)} ${statusBadge}</div>
         </div>
         <button class="drank-btn ${count > 0 ? "on" : ""}" data-name="${escapeHtml(item.name)}" aria-label="飲んだ酒として記録（タップするたびに追加）">${count > 0 ? count : "✓"}</button>
       </div>
