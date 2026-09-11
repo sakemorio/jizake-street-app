@@ -2,7 +2,7 @@
 // 会場スタッフがスマホから更新する「完売」「お知らせ」のライブ状況を読み込むURL。
 // Google Apps Script（doGet）で完売ブース番号とお知らせ文を返すウェブアプリを設定する。
 // 未設定の間はこの機能はオフ（完売バッジ・お知らせバーは出ない）。設定手順は README.md 参照。
-const LIVE_ENDPOINT = "";
+const LIVE_ENDPOINT = "https://script.google.com/macros/s/AKfycbxEM4KkCQoRgGwd1hD7RPcB59t_KVSE0M05cSxM6Yg-PYB9jOTyuvibqRbvJZg42uO1yg/exec";
 const LIVE_POLL_MS = 60000; // ポーリング間隔（1分）
 
 // ==== タブ切り替え ====
